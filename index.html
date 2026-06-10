@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>RiskIQ — Loan Risk Intelligence</title>
+  <title>RiskIQ — Loan Risk Intelligence </title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -410,7 +410,10 @@
     <div class="logo-mark">R</div>
     <div class="logo-text">Risk<span>IQ</span></div>
   </div>
-  <div class="header-tag">Loan Risk Intelligence|Sesame Dithupa</div>
+  <div class="d-flex flex-column align-items-end gap-1">
+    <div class="header-tag">Loan Risk Intelligence | Sesame Dithupa</div>
+    <div style="font-size:10px; color: var(--gold); font-weight:500; letter-spacing:0.5px;">by Sesame Dithupa</div>
+  </div>
 </header>
 
 <!-- MAIN -->
@@ -435,11 +438,11 @@
         <div class="row g-3 mb-3">
           <div class="col-6">
             <label class="form-label">Monthly Income (BWP)</label>
-            <input type="number" id="f-income" class="form-control" placeholder="e.g. 52000" min="0"/>
+            <input type="number" id="f-income" class="form-control" placeholder="e.g. 12000" min="0"/>
           </div>
           <div class="col-6">
             <label class="form-label">Monthly Debt Payments (BWP)</label>
-            <input type="number" id="f-debt" class="form-control" placeholder="e.g. 9500" min="0"/>
+            <input type="number" id="f-debt" class="form-control" placeholder="e.g. 2500" min="0"/>
           </div>
         </div>
 
@@ -565,6 +568,12 @@
   </div>
 
 </div><!-- /main-wrap -->
+
+<!-- FOOTER -->
+<footer style="background:var(--burgundy-dk); border-top:2px solid var(--gold); padding:18px 2rem; text-align:center; margin-top:2rem;">
+  <div style="font-family:'Playfair Display',serif; font-size:13px; color:var(--gold); font-weight:600; margin-bottom:3px;">RiskIQ — Loan Risk Intelligence</div>
+  <div style="font-size:11px; color:rgba(255,255,255,0.45); letter-spacing:0.5px;">Built by <strong style="color:rgba(255,255,255,0.7);">Sesame Dithupa</strong> &nbsp;·&nbsp; &copy; 2025</div>
+</footer>
 
 <script>
 // ── SCORING ENGINE ────────────────────────────────────────────────
@@ -973,6 +982,15 @@ function exportPDF() {
     });
   }
 
+  // Diagonal watermark
+  doc.saveGraphicsState();
+  doc.setGState(new doc.GState({ opacity: 0.07 }));
+  doc.setFontSize(48);
+  doc.setFont('helvetica', 'bold');
+  doc.setTextColor(109, 26, 54);
+  doc.text('By Sesame Dithupa', W / 2, 160, { align: 'center', angle: 45 });
+  doc.restoreGraphicsState();
+
   // Footer
   doc.setFillColor(78, 18, 38);
   doc.rect(0, 285, W, 12, 'F');
@@ -981,8 +999,7 @@ function exportPDF() {
   doc.setTextColor(201, 168, 76);
   doc.text('RiskIQ — Loan Risk Intelligence', margin, 292);
   doc.setTextColor(180, 160, 160);
-  doc.text('This report is for internal assessment purposes only and does not constitute a legally binding credit decision.', W - margin, 292, { align: 'right' });
-doc.text('By Sesame Dithupa.', W - margin, 292, { align: 'right' });
+  doc.text('By Sesame Dithupa  ·  For internal assessment purposes only.', W - margin, 292, { align: 'right' });
 
   doc.save(`RiskIQ_${lastResult.name.replace(/\s+/g, '_')}_${new Date().toISOString().slice(0,10)}.pdf`);
 }
@@ -992,3 +1009,4 @@ renderHistory();
 </script>
 </body>
 </html>
+
